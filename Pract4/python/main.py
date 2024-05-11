@@ -23,7 +23,7 @@ def login():
         print("Ошибка авторизации: {e}")
         return None
 
-def createEstate(account):
+def create_estate(account):
     try:
         
         razmer = int(input("Введите размер недвижимости: "))
@@ -43,16 +43,20 @@ def createEstate(account):
     except Exception as e:
         print(f"Ошибка: {e}")
 
-def createAd(account):
+def create_ad(account):
     try:
-        value = int(input("Введите кол-во WEI для отправки: "))
-        tx_hash = contract.functions.senEth().transcat({
+        prise = int(input("Введите цену: "))
+        get_estate(account)
+        id_estate = int(input("Введите ID: "))
+        is_active = int(input("1. Open \n2. Close\nВыберите активность объявления: "))
+
+        tx_hash = contract.functions.createAd(prise, id_estate, is_active).transcat({
             'from': account,
-            'value': value,
         })
+
         print(f"Ваша транзакция успешно отправлена. Хэш транзакции: {tx_hash.hex()}")
     except Exception as e:
-        print(f"Ошибка отправки WEI: {e}")
+        print(f"Ошибка создания объявления: {e}")
 
 def get_balance(account):
     try:
@@ -70,7 +74,7 @@ def get_estate(account):
         })
         
         for item in estates:
-            print(item[4])
+            print(item)
     except Exception as e:
         print("Ошибка получения недвижимости: {e}")
 
@@ -115,9 +119,9 @@ def main():
             choice = int(input("Выберите: 1. Создать недвижимость \n2. Создать объявление \n3. Сменить статус недвижимости \n4.  Сменить статус объявления \n5. Покупка недвжимости \n6. Вывод средств \n7. Доступная недвижимость \n8. Доступные объявления \n9. Баланс на смарт контракте \n10. Баланс на аккаунте \n11. Пополнить баланс \n12. Выход"))
             match choice:
                 case 1:
-                    createEstate(account)
+                    create_estate(account)
                 case 2:
-                    get_balance(account)
+                    create_ad(account)
                 case 3:
                     pass
                 case 4:
