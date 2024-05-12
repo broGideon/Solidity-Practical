@@ -147,7 +147,7 @@ def get_balance(account):
         })
         print(f"Ваш баланс на смарт-контракте: {balance}")
     except Exception as e:
-        print("Ошибка получения баланса: {e}")
+        print(f"Ошибка получения баланса: {e}")
 
 def buy_estate(account):
     try:
@@ -192,7 +192,7 @@ def get_estate(account):
         if is_active == 0:
             print("Доступной недвижимости нет")
     except Exception as e:
-        print("Ошибка получения недвижимости: {e}")
+        print(f"Ошибка получения недвижимости: {e}")
 
 def get_ads(account):
     try:
@@ -204,14 +204,14 @@ def get_ads(account):
         is_active = 0
         for item in ads:
             if item[5] == 0:
-                print(f"{count}. {item}")
+                print(f"{count}. Цена: {item[2]}, владелец: {item[0]}, ID недвижимости: {item[3]}")
                 is_active += 1
             count += 1
 
         if is_active == 0:
             print("Нет доступных объявлений")
     except Exception as e:
-        print("Ошибка получения объявлений: {e}")
+        print(f"Ошибка получения объявлений: {e}")
 
 def pay(account):
     try:
@@ -230,6 +230,20 @@ def pay(account):
     except Exception as e:
         print(f"Ошибка пополнения: {e}")
 
+def replenishment_balance(account):
+    try:
+        value = input_int("Введите значение: ")
+        if value < 0 or not value:
+            return
+        tx_hash = w3.eth.send_transaction({
+            'from': w3.eth.coinbase,
+            'to': account,
+            'value': value
+        })
+
+        print(f"Операция успешно выполнена. Хэш операции: {tx_hash}")
+    except Exception as e:
+        print(f"Ошибка пополнения баланса: {e}")
 
 def main():
     account = "";
@@ -246,7 +260,7 @@ def main():
                 case _:
                     print("Выберите 1 или 2!")
         else:
-            choice = input_int("Выберите: \n1. Создать недвижимость \n2. Создать объявление \n3. Сменить статус недвижимости \n4. Сменить статус объявления \n5. Покупка недвжимости \n6. Вывод средств \n7. Доступная недвижимость \n8. Доступные объявления \n9. Баланс на смарт контракте \n10. Баланс на аккаунте \n11. Пополнить баланс смарт контракта \n12. Выход \n")
+            choice = input_int("Выберите: \n1. Создать недвижимость \n2. Создать объявление \n3. Сменить статус недвижимости \n4. Сменить статус объявления \n5. Покупка недвжимости \n6. Вывод средств \n7. Доступная недвижимость \n8. Доступные объявления \n9. Баланс на смарт контракте \n10. Баланс на аккаунте \n11. Пополнить баланс смарт контракта \n12. Пополнить баланс акаунта \n13. Выход \n")
             match choice:
                 case 1:
                     create_estate(account)
@@ -271,6 +285,8 @@ def main():
                 case 11:
                     pay(account)
                 case 12:
+                    replenishment_balance(account)
+                case 13:
                     account = ""
                 case _:
                     print("Выберите от 1 до 11")

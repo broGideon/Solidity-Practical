@@ -190,3 +190,35 @@
 17:39:52.008404 table@compaction committed F-1 S-510KiB Ke·0 D·29583 T·29.8946ms
 17:39:52.008404 table@remove removed @48
 17:39:52.009127 table@remove removed @46
+=============== May 13, 2024 (MSK) ===============
+00:11:36.464945 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+00:11:36.467031 version@stat F·[0 1] S·887KiB[0B 887KiB] Sc·[0.00 0.01]
+00:11:36.467031 db@open opening
+00:11:36.467543 journal@recovery F·1
+00:11:36.470168 journal@recovery recovering @47
+00:11:36.475748 memdb@flush created L0@50 N·3310 S·95KiB "n:\x02..ong,v198393":"n:\xff..ail,v198421"
+00:11:36.478753 version@stat F·[1 1] S·983KiB[95KiB 887KiB] Sc·[0.25 0.01]
+00:11:36.484354 db@janitor F·5 G·1
+00:11:36.484354 db@janitor removing table-43
+00:11:36.485357 db@open done T·18.3262ms
+00:11:38.042145 table@compaction L0·1 -> L1·1 S·983KiB Q·198901
+00:11:38.057846 table@build created L1@53 N·27817 S·901KiB "loc..seq,v184827":"version,v1"
+00:11:38.057846 version@stat F·[0 1] S·901KiB[0B 901KiB] Sc·[0.00 0.01]
+00:11:38.060359 table@compaction committed F-1 S-81KiB Ke·0 D·2914 T·18.2138ms
+00:11:38.060359 table@remove removed @49
+=============== May 13, 2024 (MSK) ===============
+00:11:45.038129 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+00:11:45.038129 version@stat F·[0 1] S·901KiB[0B 901KiB] Sc·[0.00 0.01]
+00:11:45.038129 db@open opening
+00:11:45.039132 journal@recovery F·1
+00:11:45.039132 journal@recovery recovering @51
+00:11:45.040136 memdb@flush created L0@54 N·31 S·1KiB "loc..seq,v198913":"n:\xaf..ail,v198892"
+00:11:45.042249 version@stat F·[1 1] S·902KiB[1KiB 901KiB] Sc·[0.25 0.01]
+00:11:45.048823 db@janitor F·5 G·1
+00:11:45.048823 db@janitor removing table-50
+00:11:45.048823 db@open done T·10.6939ms
+00:11:47.236494 table@compaction L0·1 -> L1·1 S·902KiB Q·198938
+00:11:47.249822 table@build created L1@57 N·27818 S·901KiB "loc..seq,v198913":"version,v1"
+00:11:47.249822 version@stat F·[0 1] S·901KiB[0B 901KiB] Sc·[0.00 0.01]
+00:11:47.251376 table@compaction committed F-1 S-1KiB Ke·0 D·30 T·14.8816ms
+00:11:47.251965 table@remove removed @53
