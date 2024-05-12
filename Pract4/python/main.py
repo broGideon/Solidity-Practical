@@ -17,7 +17,7 @@ def input_int(info):
         return False
     
 def secure(password):
-    if password.count < 12:
+    if len(password) < 12:
         print("Пароль должен быть больше 12 символов")
         return False
 
@@ -63,11 +63,14 @@ def login():
 
 def create_estate(account):
     try:
-        
-        razmer = int(input("Введите размер недвижимости: "))
-        address = input("Введите адрес недвижимости: ")
-        type = int(input("1. House \n2. Flat\n3. Loft \nВыберите тип недвижимости: "))
+        razmer = input_int("Введите размер недвижимости: ")
+        if not razmer:
+            return
 
+        address = input("Введите адрес недвижимости: ")
+        type = input_int("1. House \n2. Flat\n3. Loft \nВыберите тип недвижимости: ")
+        if not type:
+            return
         if type < 1 or type > 3:
             print("Неверный тип")
             return
@@ -83,11 +86,18 @@ def create_estate(account):
 
 def create_ad(account):
     try:
-        prise = int(input("Введите цену: "))
+        prise = input_int("Введите цену: ")
+        if not prise:
+            return
+        
         get_estate(account)
-        id_estate = int(input("Введите ID: "))
-        ad_status = int(input("1. Open \n2. Close\nВыберите активность объявления: "))
-
+        id_estate = input_int("Введите ID: ")
+        if not id_estate:
+            return
+        
+        ad_status = input_int("1. Open \n2. Close\nВыберите активность объявления: ")
+        if not ad_status:
+            return
         if ad_status < 1 or ad_status > 2:
             print("Недопустимое значение")
             return
@@ -103,7 +113,9 @@ def create_ad(account):
 def change_status_estate(account):
     try:
         get_estate(account)
-        id_estate = int(input("Введите ID: "))
+        id_estate = input_int("Введите ID: ")
+        if not id_estate:
+            return
 
         tx_hash = contract.functions.changeStatusEstate(id_estate).transact({
             'from': account 
@@ -116,7 +128,9 @@ def change_status_estate(account):
 def change_status_ad(account):
     try:
         get_ads(account)
-        id_ad = int(input("Введите ID: "))
+        id_ad = input_int("Введите ID: ")
+        if not id_ad:
+            return
 
         tx_hash = contract.functions.changeStatusAd(id_ad).transact({
             'from': account 
@@ -138,8 +152,9 @@ def get_balance(account):
 def buy_estate(account):
     try:
         get_ads(account)
-        id_ad = int(input("Введите ID: "))
-        to = input("Введите адрес:")
+        id_ad = input_int("Введите ID: ")
+        if not id_ad:
+            return
         tx_hash = contract.functions.buyEstate(id_ad).transact({
             'from' : account
         })
@@ -150,7 +165,9 @@ def buy_estate(account):
 
 def withdraw(account):
     try:
-        value = int(input("Введите кол-во WEI для вывода: "))
+        value = input_int("Введите кол-во WEI для вывода: ")
+        if not value:
+            return
         tx_hash = contract.functions.withDraw(value).transact({
             'from' : account
         })
@@ -164,9 +181,16 @@ def get_estate(account):
         estates = contract.functions.getEstates().call({
             'from': account
         })
-        
+
+        type = {0 : "House", 1 : "Flat", 2 : "Loft"}
+        is_active = 0
+
         for item in estates:
-            print(item)
+            if item[4] == True:
+                print(f"{item[5]}. Размер: {item[0]}, адрес: {item[1]}, владелец: {item[2]}, тип недвижемости {type[item[3]]}")
+                is_active += 1
+        if is_active == 0:
+            print("Доступной недвижимости нет")
     except Exception as e:
         print("Ошибка получения недвижимости: {e}")
 
@@ -175,15 +199,25 @@ def get_ads(account):
         ads = contract.functions.getAds().call({
             'from': account
         })
-
+    
+        count = 1
+        is_active = 0
         for item in ads:
-            print(item)
+            if item[5] == 0:
+                print(f"{count}. {item}")
+                is_active += 1
+            count += 1
+
+        if is_active == 0:
+            print("Нет доступных объявлений")
     except Exception as e:
         print("Ошибка получения объявлений: {e}")
 
 def pay(account):
     try:
-        value = int(input("Введите кол-во WEI для пополнения: "))
+        value = input_int("Введите кол-во WEI для пополнения: ")
+        if not value:
+            return
         if value <= 0:
             print("Значение должно быть больше нуля") 
             return
@@ -201,7 +235,7 @@ def main():
     account = "";
     while True:
         if account == "" or account == None:
-            choice = int(input("Долбро пожаловать в систему! Выберите: 1. Регистрация 2. Авторизация 3. Выйти \n"))
+            choice = input_int("Долбро пожаловать в систему! Выберите: 1. Регистрация 2. Авторизация 3. Выйти \n")
             match choice:
                 case 1:
                     register()
@@ -212,7 +246,7 @@ def main():
                 case _:
                     print("Выберите 1 или 2!")
         else:
-            choice = int(input("Выберите: \n1. Создать недвижимость \n2. Создать объявление \n3. Сменить статус недвижимости \n4.  Сменить статус объявления \n5. Покупка недвжимости \n6. Вывод средств \n7. Доступная недвижимость \n8. Доступные объявления \n9. Баланс на смарт контракте \n10. Баланс на аккаунте \n11. Пополнить баланс смарт контракта \n12. Выход \n"))
+            choice = input_int("Выберите: \n1. Создать недвижимость \n2. Создать объявление \n3. Сменить статус недвижимости \n4. Сменить статус объявления \n5. Покупка недвжимости \n6. Вывод средств \n7. Доступная недвижимость \n8. Доступные объявления \n9. Баланс на смарт контракте \n10. Баланс на аккаунте \n11. Пополнить баланс смарт контракта \n12. Выход \n")
             match choice:
                 case 1:
                     create_estate(account)

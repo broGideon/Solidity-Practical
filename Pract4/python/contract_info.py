@@ -96,6 +96,96 @@ abi = """
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "idAd",
+				"type": "uint256"
+			}
+		],
+		"name": "buyEstate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "idAd",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "idEstate",
+				"type": "uint256"
+			}
+		],
+		"name": "changeStatusAd",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "idEstate",
+				"type": "uint256"
+			}
+		],
+		"name": "changeStatusEstate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "prise",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "idEstate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "enum MyEstate.AdStatus",
+				"name": "adStatus",
+				"type": "uint8"
+			}
+		],
+		"name": "createAd",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "size",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "estateAddress",
+				"type": "string"
+			},
+			{
+				"internalType": "enum MyEstate.EstateType",
+				"name": "esType",
+				"type": "uint8"
+			}
+		],
+		"name": "createEstate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -232,91 +322,21 @@ abi = """
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "idAd",
-				"type": "uint256"
-			}
-		],
-		"name": "buyEstate",
+		"inputs": [],
+		"name": "pay",
 		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "idAd",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "idEstate",
+				"name": "value",
 				"type": "uint256"
 			}
 		],
-		"name": "changeStatusAd",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "idEstate",
-				"type": "uint256"
-			}
-		],
-		"name": "changeStatusEstate",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "prise",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "idEstate",
-				"type": "uint256"
-			},
-			{
-				"internalType": "enum MyEstate.AdStatus",
-				"name": "adStatus",
-				"type": "uint8"
-			}
-		],
-		"name": "createAd",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "size",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "estateAddress",
-				"type": "string"
-			},
-			{
-				"internalType": "enum MyEstate.EstateType",
-				"name": "esType",
-				"type": "uint8"
-			}
-		],
-		"name": "createEstate",
+		"name": "withDraw",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -422,26 +442,6 @@ abi = """
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "pay",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			}
-		],
-		"name": "withDraw",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

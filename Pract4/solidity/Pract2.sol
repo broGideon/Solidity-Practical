@@ -69,11 +69,13 @@ contract MyEstate {
     }
 
     function createAd(uint prise, uint idEstate, AdStatus adStatus) onlyEstateOwner(idEstate) isActiveEstate(idEstate) public{
+        require(idEstate > 0 && idEstate <= estates.length, unicode"Недопустимый ID");
         ads.push(Advertisement(msg.sender, address(0), prise, idEstate, block.timestamp, adStatus));
         emit adCreated(msg.sender, idEstate, ads.length + 1, block.timestamp, prise);
     }
     
     function changeStatusEstate(uint idEstate) onlyEstateOwner(idEstate) public{
+        require(idEstate > 0 && idEstate <= estates.length, unicode"Недопустимый ID");
         estates[idEstate-1].isActive = false;
         emit estateStatusChanged(msg.sender, idEstate, block.timestamp, false);
 
@@ -86,6 +88,7 @@ contract MyEstate {
     }
 
     function changeStatusAd(uint idAd, uint idEstate) public onlyAddOwner(idAd-1) isActiveEstate(idEstate){
+        require(idAd > 0 && idAd <= ads.length, unicode"Недопустимый ID");
         ads[idAd-1].adStatus = AdStatus.Closed; 
         emit adStatusChanged(msg.sender, idEstate, idAd, block.timestamp, AdStatus.Closed);
     }
@@ -99,6 +102,7 @@ contract MyEstate {
     }
 
     function buyEstate(uint idAd) public isCloseAd(idAd) enoughValue(balances[msg.sender], ads[idAd-1].price){
+        require(idAd > 0 && idAd <= ads.length, unicode"Недопустимый ID");
         ads[idAd-1].adStatus = AdStatus.Closed;
         estates[ads[idAd-1].idEstate-1].isActive = false;
         balances[ads[idAd-1].owner] += ads[idAd-1].price;
