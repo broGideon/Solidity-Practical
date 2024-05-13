@@ -94,8 +94,8 @@ contract MyEstate {
     }
 
     function withDraw(uint value) public{
-        require(value > balances[msg.sender], unicode"У вас недостаточно средств на смарт контракте");
-        require(value < 0, unicode"Значение для вывода должно быть больше 0");
+        require(value <= balances[msg.sender], unicode"У вас недостаточно средств на смарт контракте");
+        require(value > 0, unicode"Значение для вывода должно быть больше 0");
         payable(msg.sender).transfer(value);
         balances[msg.sender] -= value;
         emit fundsBack(msg.sender, value, block.timestamp);

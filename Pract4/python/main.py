@@ -82,7 +82,7 @@ def create_estate(account):
 
         print(f"Операция успешно выполнена. Хэш операции: {tx_hash}")
     except Exception as e:
-        print(f"Ошибка создания объявления: {e}")
+        print(f"Ошибка создания недвижимости: {e}")
 
 def create_ad(account):
     try:
@@ -233,8 +233,12 @@ def pay(account):
 def replenishment_balance(account):
     try:
         value = input_int("Введите значение: ")
-        if value < 0 or not value:
+        if not value:
             return
+        if value <= 0:
+            print("Значение должно быть больше нуля") 
+            return
+        
         tx_hash = w3.eth.send_transaction({
             'from': w3.eth.coinbase,
             'to': account,
@@ -289,8 +293,7 @@ def main():
                 case 13:
                     account = ""
                 case _:
-                    print("Выберите от 1 до 11")
+                    print("Выберите от 1 до 12")
 
 if __name__ == "__main__":
     main()
-
