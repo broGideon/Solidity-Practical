@@ -8,6 +8,7 @@ w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
 contract = w3.eth.contract(address=contract_info.contract_address, abi=contract_info.abi)
 
+
 def input_int(info):
     try:
         data = int(input(info))
@@ -15,7 +16,8 @@ def input_int(info):
     except:
         print("Неверный тип данных")
         return False
-    
+
+
 def secure(password):
     if len(password) < 12:
         print("Пароль должен быть больше 12 символов")
@@ -39,6 +41,7 @@ def secure(password):
 
     return True
 
+
 def register():
     is_secure = False
     while(not is_secure):
@@ -50,6 +53,7 @@ def register():
     account = w3.geth.personal.new_account(password)
     print(f"Ваш публичный ключ: {account}")
 
+
 def login():
     public_key = input("Введите ваш публичный ключ: ")
     password = input("Введите пароль: ")
@@ -60,6 +64,7 @@ def login():
     except Exception as e:
         print(f"Ошибка авторизации: {e}")
         return None
+
 
 def create_estate(account):
     try:
@@ -83,6 +88,7 @@ def create_estate(account):
         print(f"Операция успешно выполнена. Хэш операции: {tx_hash}")
     except Exception as e:
         print(f"Ошибка создания недвижимости: {e}")
+
 
 def create_ad(account):
     try:
@@ -110,6 +116,7 @@ def create_ad(account):
     except Exception as e:
         print(f"Ошибка создания объявления: {e}")
 
+
 def change_status_estate(account):
     try:
         get_estate(account)
@@ -124,6 +131,7 @@ def change_status_estate(account):
         print(f"Операция успешно выполнена. Хэш операции: {tx_hash}")
     except Exception as e:
         print(f"Ошибка смены статуса: {e}")
+
 
 def change_status_ad(account):
     try:
@@ -140,6 +148,7 @@ def change_status_ad(account):
     except Exception as e:
         print(f"Ошибка смены статуса: {e}")
 
+
 def get_balance(account):
     try:
         balance = contract.functions.getBalance().call({
@@ -148,6 +157,7 @@ def get_balance(account):
         print(f"Ваш баланс на смарт-контракте: {balance}")
     except Exception as e:
         print(f"Ошибка получения баланса: {e}")
+
 
 def buy_estate(account):
     try:
@@ -163,6 +173,7 @@ def buy_estate(account):
     except Exception as e:
         print(f"Ошибка транзакции: {e}")
 
+
 def withdraw(account):
     try:
         value = input_int("Введите кол-во WEI для вывода: ")
@@ -175,6 +186,7 @@ def withdraw(account):
         print(f"Операция успешно выполнена. Хэш операции: {tx_hash}")
     except Exception as e:
         print(f"Ошибка транзакции: {e}")
+
 
 def get_estate(account):
     try:
@@ -193,6 +205,7 @@ def get_estate(account):
             print("Доступной недвижимости нет")
     except Exception as e:
         print(f"Ошибка получения недвижимости: {e}")
+
 
 def get_ads(account):
     try:
@@ -213,6 +226,7 @@ def get_ads(account):
     except Exception as e:
         print(f"Ошибка получения объявлений: {e}")
 
+
 def pay(account):
     try:
         value = input_int("Введите кол-во WEI для пополнения: ")
@@ -229,6 +243,7 @@ def pay(account):
         print(f"Операция успешно выполнена. Хэш операции: {tx_hash}")
     except Exception as e:
         print(f"Ошибка пополнения: {e}")
+
 
 def replenishment_balance(account):
     try:
@@ -248,6 +263,7 @@ def replenishment_balance(account):
         print(f"Операция успешно выполнена. Хэш операции: {tx_hash}")
     except Exception as e:
         print(f"Ошибка пополнения баланса: {e}")
+
 
 def main():
     account = "";
@@ -294,6 +310,7 @@ def main():
                     account = ""
                 case _:
                     print("Выберите от 1 до 12")
+
 
 if __name__ == "__main__":
     main()
