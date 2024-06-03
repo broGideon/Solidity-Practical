@@ -1,4 +1,4 @@
-contract_address = "0xa7061Ce5d25aD5cb51Be17113FC54825b2100DDE"
+contract_address = "0xB081AdbDfc1E5E1de7a0b1c8b1CA6d38479565A7"
 
 abi = """
 [

@@ -19,164 +19,169 @@
     {% endif %}
 {% endwith %}
 <div class="cards">
-    <div class="card hidden-parent" style="width: 18rem;">
-        <button class="btn btn-primary toggleFormButton" >Создать недвижимость</button>
-        <div class="hidden mt-3 formContainer">
-            <form method="post" class="form">
-                <input type="hidden" name="type_form" value="createEstate">
-                <div class="form-group">
-                    <input type="number" min="1" class="form-control" name="razmer" placeholder="Размер" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="address" placeholder="Адрес" required>
-                </div>
-                <div class="form-group">
-                    <select class="form-control" name="type" required>
-                        <option value="0">House</option>
-                        <option value="1">Flat</option>
-                        <option value="2">Loft</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-success">Отправить</button>
-            </form>
+    <div class="col-12 d-flex justify-content-around">
+        <div class="card hidden-parent" style="width: 18rem;">
+            <button class="btn btn-primary toggleFormButton" >Создать недвижимость</button>
+            <div class="hidden mt-3 formContainer">
+                <form method="post" class="form">
+                    <input type="hidden" name="type_form" value="createEstate">
+                    <div class="form-group">
+                        <input type="number" min="1" class="form-control" name="razmer" placeholder="Размер" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="address" placeholder="Адрес" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="type" required>
+                            <option value="0">House</option>
+                            <option value="1">Flat</option>
+                            <option value="2">Loft</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
+        </div>
+        <div class="card hidden-parent" style="width: 18rem;">
+            <button class="btn btn-primary toggleFormButton" >Создать объявление</button>
+            <div class="hidden mt-3 formContainer">
+                <form method="post" class="form">
+                    <input type="hidden" name="type_form" value="createAd">
+                    <div class="form-group">
+                        <input type="number" min="1" class="form-control" name="price" placeholder="Цена" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="id_estate" required>
+                            {% for estate in estates %}
+                                {% if estate[4] == True %}
+                                    <option value="{{ estate[5] }}">Размер: {{ estate[0] }}, адрес: {{ estate[1] }}, тип недвижимости: {{ type_estate[estate[3]] }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="is_open" required>
+                            <option value="0">Open</option>
+                            <option value="1">Close</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
+        </div>
+        <div class="card hidden-parent" style="width: 18rem;">
+            <button class="btn btn-primary toggleFormButton" >Сменить статус недвижимости</button>
+            <div class="hidden mt-3 formContainer">
+                <form method="post" class="form">
+                    <input type="hidden" name="type_form" value="changeStatusEstate">
+                    <div class="form-group">
+                        <select class="form-control" name="id_estate" required>
+                            {% for estate in estates %}
+                                {% if estate[4] == True %}
+                                    <option value="{{ estate[5] }}">Размер: {{ estate[0] }}, адрес: {{ estate[1] }}, тип недвижимости: {{ type_estate[estate[3]] }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="card hidden-parent" style="width: 18rem;">
-        <button class="btn btn-primary toggleFormButton" >Создать объявление</button>
-        <div class="hidden mt-3 formContainer">
-            <form method="post" class="form">
-                <input type="hidden" name="type_form" value="createAd">
-                <div class="form-group">
-                    <input type="number" min="1" class="form-control" name="price" placeholder="Цена" required>
-                </div>
-                <div class="form-group">
-                    <select class="form-control" name="id_estate" required>
-                        {% for estate in estates %}
-                            {% if estate[4] == True %}
-                                <option value="{{ estate[5] }}">Размер: {{ estate[0] }}, адрес: {{ estate[1] }}, тип недвижимости: {{ type_estate[estate[3]] }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select class="form-control" name="is_open" required>
-                        <option value="0">Open</option>
-                        <option value="1">Close</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-success">Отправить</button>
-            </form>
+    <div class="col-12 d-flex justify-content-around">
+        <div class="card hidden-parent" style="width: 18rem;">
+            <button class="btn btn-primary toggleFormButton" >Сменить статус объявления</button>
+            <div class="hidden mt-3 formContainer">
+                <form method="post" class="form">
+                    <input type="hidden" name="type_form" value="changeStatusAd">
+                    <div class="form-group">
+                        <select class="form-control" name="id_ad" required>
+                            {% for ad in ads %}
+                                {% if ad[5] == 0 %}
+                                    <option value="{{ ads.index(ad) + 1 }}">Цена: {{ ad[2] }}, владелец: {{ ad[0] }}, ID недвижимости: {{ ad[3] }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
+        </div>
+        <div class="card hidden-parent" style="width: 18rem;">
+            <button class="btn btn-primary toggleFormButton" >Покупка</button>
+            <div class="hidden mt-3 formContainer">
+                <form method="post" class="form">
+                    <input type="hidden" name="type_form" value="buy_estate">
+                    <div class="form-group">
+                        <select class="form-control" name="id_ad" required>
+                            {% for ad in ads %}
+                                {% if ad[5] == 0 %}
+                                    <option value="{{ ads.index(ad) + 1 }}">Цена: {{ ad[2] }}, владелец: {{ ad[0] }}, ID недвижимости: {{ ad[3] }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
+        </div>
+        <div class="card hidden-parent" style="width: 18rem;">
+            <button class="btn btn-primary toggleFormButton" >Вывод средств</button>
+            <div class="hidden mt-3 formContainer">
+                <form method="post" class="form">
+                    <input type="hidden" name="type_form" value="withdraw">
+                    <div class="form-group">
+                        <input type="number" min="1" class="form-control" name="money" placeholder="Значение" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="card hidden-parent" style="width: 18rem;">
-        <button class="btn btn-primary toggleFormButton" >Сменить статус недвижимости</button>
-        <div class="hidden mt-3 formContainer">
-            <form method="post" class="form">
-                <input type="hidden" name="type_form" value="changeStatusEstate">
-                <div class="form-group">
-                    <select class="form-control" name="id_estate" required>
-                        {% for estate in estates %}
-                            {% if estate[4] == True %}
-                                <option value="{{ estate[5] }}">Размер: {{ estate[0] }}, адрес: {{ estate[1] }}, тип недвижимости: {{ type_estate[estate[3]] }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-success">Отправить</button>
-            </form>
+    <div class="col-12 d-flex justify-content-around">
+        <div class="card hidden-parent" style="width: 18rem;">
+            <button class="btn btn-primary toggleFormButton">Пополнить смарт-контракт</button>
+            <div class="hidden mt-3 formContainer">
+                <form method="post" class="form">
+                    <input type="hidden" name="type_form" value="pay">
+                    <div class="form-group">
+                        <input type="number" min="1" class="form-control" name="money" placeholder="Значение" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="card hidden-parent" style="width: 18rem;">
-        <button class="btn btn-primary toggleFormButton" >Сменить статус объявления</button>
-        <div class="hidden mt-3 formContainer">
-            <form method="post" class="form">
-                <input type="hidden" name="type_form" value="changeStatusAd">
-                <div class="form-group">
-                    <select class="form-control" name="id_ad" required>
-                        {% for ad in ads %}
-                            {% if ad[5] == 0 %}
-                                <option value="{{ ads.index(ad) + 1 }}">Цена: {{ ad[2] }}, владелец: {{ ad[0] }}, ID недвижимости: {{ ad[3] }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-success">Отправить</button>
-            </form>
+        <div class="card hidden-parent" style="width: 18rem;">
+            <button class="btn btn-primary toggleFormButton" >Вся недвижимость</button>
+            <div class="hidden mt-3 formContainer">
+                <form method="post" class="form">
+                    <div class="form-group">
+                        <ol class="form-control" name="id_ad" required>
+                            {% for estate in estates %}
+                                {% if estate[4] == True %}
+                                    <li value="{{ estate[5] }}">Размер: {{ estate[0] }}, адрес: {{ estate[1] }}, тип недвижимости: {{ type_estate[estate[3]] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="card hidden-parent" style="width: 18rem;">
-        <button class="btn btn-primary toggleFormButton" >Покупка</button>
-        <div class="hidden mt-3 formContainer">
-            <form method="post" class="form">
-                <input type="hidden" name="type_form" value="buy_estate">
-                <div class="form-group">
-                    <select class="form-control" name="id_ad" required>
-                        {% for ad in ads %}
-                            {% if ad[5] == 0 %}
-                                <option value="{{ ads.index(ad) + 1 }}">Цена: {{ ad[2] }}, владелец: {{ ad[0] }}, ID недвижимости: {{ ad[3] }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-success">Отправить</button>
-            </form>
-        </div>
-    </div>
-    <div class="card hidden-parent" style="width: 18rem;">
-        <button class="btn btn-primary toggleFormButton" >Вывод средств</button>
-        <div class="hidden mt-3 formContainer">
-            <form method="post" class="form">
-                <input type="hidden" name="type_form" value="withdraw">
-                <div class="form-group">
-                    <input type="number" min="1" class="form-control" name="money" placeholder="Значение" required>
-                </div>
-                <button type="submit" class="btn btn-success">Отправить</button>
-            </form>
-        </div>
-    </div>
-    <div class="card hidden-parent" style="width: 18rem;">
-        <button class="btn btn-primary toggleFormButton">Пополнить смарт-контракт</button>
-        <div class="hidden mt-3 formContainer">
-            <form method="post" class="form">
-                <input type="hidden" name="type_form" value="pay">
-                <div class="form-group">
-                    <input type="number" min="1" class="form-control" name="money" placeholder="Значение" required>
-                </div>
-                <button type="submit" class="btn btn-success">Отправить</button>
-            </form>
-        </div>
-    </div>
-    <div class="card hidden-parent" style="width: 18rem;">
-        <button class="btn btn-primary toggleFormButton" >Вся недвижимость</button>
-        <div class="hidden mt-3 formContainer">
-            <form method="post" class="form">
-                <div class="form-group">
-                    <ol class="form-control" name="id_ad" required>
-                        {% for estate in estates %}
-                            {% if estate[4] == True %}
-                                <li value="{{ estate[5] }}">Размер: {{ estate[0] }}, адрес: {{ estate[1] }}, тип недвижимости: {{ type_estate[estate[3]] }}</li>
-                            {% endif %}
-                        {% endfor %}
-                    </ol>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="card hidden-parent" style="width: 18rem;">
-        <button class="btn btn-primary toggleFormButton" >Все объявления</button>
-        <div class="hidden mt-3 formContainer">
-            <form method="post" class="form">
-                <div class="form-group">
-                    <ol class="form-control">
-                        {% for ad in ads %}
-                            {% if ad[5] == 0 %}
-                                <li value="{{ ads.index(ad) + 1 }}">Цена: {{ ad[2] }}, владелец: {{ ad[0] }}, ID недвижимости: {{ ad[3] }}</li>
-                            {% endif %}
-                        {% endfor %}
-                    </ol>
-                </div>
-            </form>
+        <div class="card hidden-parent" style="width: 18rem;">
+            <button class="btn btn-primary toggleFormButton" >Все объявления</button>
+            <div class="hidden mt-3 formContainer">
+                <form method="post" class="form">
+                    <div class="form-group">
+                        <ol class="form-control">
+                            {% for ad in ads %}
+                                {% if ad[5] == 0 %}
+                                    <li value="{{ ads.index(ad) + 1 }}">Цена: {{ ad[2] }}, владелец: {{ ad[0] }}, ID недвижимости: {{ ad[3] }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

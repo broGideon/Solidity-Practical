@@ -103,6 +103,7 @@ contract MyEstate {
 
     function buyEstate(uint idAd) public isCloseAd(idAd) enoughValue(balances[msg.sender], ads[idAd-1].price){
         require(idAd > 0 && idAd <= ads.length, unicode"Недопустимый ID");
+        require(ads[idAd-1].owner != msg.sender, unicode"Нельзя купить свою недвижимость");
         ads[idAd-1].adStatus = AdStatus.Closed;
         estates[ads[idAd-1].idEstate-1].isActive = false;
         balances[ads[idAd-1].owner] += ads[idAd-1].price;
