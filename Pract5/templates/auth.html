@@ -9,18 +9,18 @@
     <title>АОАОАООАОАОА</title>
 </head>
 <body>
-<div class="container" style="height: 100%">
-    <div class="row justify-content-center align-content-center" style="height: 100%">
-        <form method="post" class="form col-4">
-            <input type="text" name="login" placeholder="Введите публичный ключ">
-            <input type="password" name = "password" placeholder="Введите пароль">
-            <button class="style-button" type="submit">Авторизироваться</button>
-            {% if error %}
-            <p style="color: red; font-size: 12px">{{ error }}</p>
-            {% endif %}
-            <a class="style-a" href="/">Назад</a>
-        </form>
+    <div class="container" style="height: 100%">
+        <div class="row justify-content-center align-content-center" style="height: 100%">
+            <form method="post" class="form col-4">
+                <input type="text" name="login" placeholder="Введите публичный ключ">
+                <input type="password" name = "password" placeholder="Введите пароль">
+                <button class="style-button" type="submit">Авторизироваться</button>
+                {% if error %}
+                <p style="color: red; font-size: 12px">{{ error }}</p>
+                {% endif %}
+                <a class="style-a" href="/">Назад</a>
+            </form>
+        </div>
     </div>
-</div>
 </body>
 </html>

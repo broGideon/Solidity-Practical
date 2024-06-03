@@ -9,23 +9,23 @@
     <title>АОАОАООАОАОА</title>
 </head>
 <body>
-<div class="container" style="height: 100%">
-    <div class="row justify-content-center align-content-center" style="height: 100%">
-        <form method="post" class="form col-4">
-            <input type="password" name = "password" placeholder="Введите пароль">
-            <button class="style-button" type="submit">Зарегистрироваться</button>
-            {% if error %}
-            <p style="color: red; font-size: 12px">{{ error }}</p>
-            {% endif %}
-            {% if login %}
-            <div class="reg">
-                <h4>New account: </h4>
-                <p style="color: green; font-size: 14px">{{ login }}</p>
-            </div>
-            {% endif %}
-            <a class="style-a" href="/">Назад</a>
-        </form>
+    <div class="container" style="height: 100%">
+        <div class="row justify-content-center align-content-center" style="height: 100%">
+            <form method="post" class="form col-4">
+                <input type="password" name = "password" placeholder="Введите пароль">
+                <button class="style-button" type="submit">Зарегистрироваться</button>
+                {% if error %}
+                <p style="color: red; font-size: 12px">{{ error }}</p>
+                {% endif %}
+                {% if login %}
+                <div class="reg">
+                    <h4>New account: </h4>
+                    <p style="color: green; font-size: 14px">{{ login }}</p>
+                </div>
+                {% endif %}
+                <a class="style-a" href="/">Назад</a>
+            </form>
+        </div>
     </div>
-</div>
 </body>
 </html>
