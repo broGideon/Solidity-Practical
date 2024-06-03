@@ -1,0 +1,10 @@
+0xe33BE776502e50c32417275264D517C5ddccB4b0 - Майнер (пароль 1)
+0x08df5d96DDb1103d6266c8Ac013Ac8B63bE88F23
+0xD2B63edC07ac162E27b4Cf76F1740E1d76553aBc
+0x29C163E2A277a87f80e1F1584675Fc3230982DDF
+0x1E9FEA97ff3ef527860839da6167370a41592fE4
+
+
+geth --datadir data --networkid 12345 --unlock 0xe33BE776502e50c32417275264D517C5ddccB4b0 --allow-insecure-unlock --http --http.corsdomain="*" --http.api web3,eth,debug,personal,net,miner --miner.etherbase 0xe33BE776502e50c32417275264D517C5ddccB4b0
+
+geth attach --datadir data ipc:\\.\pipe\geth.ipc 

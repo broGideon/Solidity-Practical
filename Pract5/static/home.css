@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    background-color: #1f1624 !important;
+}
+
+.style-a {
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s;
+    user-select: none;
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.style-a:hover{
+    color: rgb(0,0,255);
+}
+
+.cards{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.hidden{
+    display: none;
+}
+
+.hidden-parent{
+    border: none !important;
+    background: transparent !important;
+}
+
+.successful{
+    color: green;
+}
+
+.error{
+    color: red;
+}
